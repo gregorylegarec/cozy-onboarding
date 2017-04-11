@@ -7,7 +7,7 @@ module.exports = {
   externals: ['cozy'],
   plugins: [
     new webpack.DefinePlugin({
-      __SERVER__: JSON.stringify('http://app.cozy.local'),
+      __SERVER__: JSON.stringify('http://app.cozy.tools'),
       __STACK_ASSETS__: false
     }),
     new webpack.ProvidePlugin({
