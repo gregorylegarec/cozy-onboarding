@@ -56,8 +56,6 @@
     "postcss": "^5.2.0",
     "postcss-discard-duplicates": "^2.0.2",
     "postcss-loader": "^1.1.0",
-    "pouchdb": "^6.1.2",
-    "pouchdb-find": "^0.10.5",
     "sinon": "^1.17.0",
     "standard": "^8.6.0",
     "style-loader": "^0.13.0",
