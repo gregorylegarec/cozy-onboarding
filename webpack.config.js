@@ -1,22 +1,13 @@
 'use strict'
 
 const merge = require('webpack-merge')
+const { production } = require('./config/webpack.vars')
 
-const build = process.env.NODE_ENV === 'production'
-
-const common = merge(
+module.exports = merge(
   require('./config/webpack.base.config'),
   require('./config/webpack.disable-contexts.config'),
   require('./config/webpack.cozy-ui.config'),
   require('./config/webpack.pictures.config'),
-  require('./config/webpack.copyfiles.config')
+  require('./config/webpack.copyfiles.config'),
+  require(production ? './config/webpack.config.prod' : './config/webpack.config.dev')
 )
-
-if (build) {
-  module.exports = merge(
-    common,
-    require('./config/webpack.prod.config')
-  )
-} else {
-  module.exports = common
-}
