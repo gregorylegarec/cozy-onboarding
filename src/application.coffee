@@ -32,6 +32,11 @@ class App extends Application
         @contextToken = applicationElement.dataset.token
         @domain = applicationElement.dataset.cozyStack
 
+        if (@contextToken)
+          cozy.client.init \
+            cozyURL: "//#{applicationElement.dataset.cozyStack}",
+            token: @contextToken
+
         @on 'start', (options)=>
             @layout = new AppLayout()
             @layout.render()
