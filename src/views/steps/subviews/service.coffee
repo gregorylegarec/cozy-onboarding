@@ -55,8 +55,10 @@ module.exports = class ServiceView extends ItemView
             .create @intent.action, @intent.type
             .start modal.getContentWrapper()
             .then (doc) =>
+                modal.hide()
                 @onIntentSuccess doc
             .catch (error) =>
+                modal.hide()
                 @onIntentError error
             .then () =>
                 @setBusy false
