@@ -7,6 +7,7 @@ module.exports = class AgreementView extends StepView
     ui:
         next: '.controls .next'
         checkbox: '.checkbox input'
+        errors: '.errors'
 
     events:
         'click @ui.next': 'onSubmit'
@@ -14,13 +15,12 @@ module.exports = class AgreementView extends StepView
 
     onRender: (args...) ->
         super args...
-        @$errorContainer=@$('.errors')
         @$statsPart = @$('.stats-agreement')
 
         if @error
-            @renderError(@error)
+            @showError(@error)
         else
-            @$errorContainer.hide()
+            @hideError()
 
         # if expected environment variable, hide stats checkbox part
         if @isStatsAgreementDisabled
@@ -55,8 +55,3 @@ module.exports = class AgreementView extends StepView
     # part according to an environment variable
     disableStatsAgreement: ->
         @isStatsAgreementDisabled = true
-
-
-    renderError: (error) ->
-        @$errorContainer.html(t(error))
-        @$errorContainer.show()

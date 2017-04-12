@@ -20,7 +20,8 @@ module.exports = class WelcomeView extends StepView
     template: require '../templates/view_steps_welcome'
 
     ui:
-        next: '.controls .next'
+        next: '.controls .next',
+        errors: '.errors'
 
     events:
         'click @ui.next': 'onSubmit'

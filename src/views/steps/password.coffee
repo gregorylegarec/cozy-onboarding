@@ -7,6 +7,9 @@ module.exports = class PasswordView extends StepView
 
     template: require '../templates/view_steps_password'
 
+    ui:
+        errors: '.errors'
+
     events:
         'click .next': 'onSubmit'
         'click [action=password-visibility]': 'onToggleVisibility'
@@ -25,11 +28,11 @@ module.exports = class PasswordView extends StepView
         @$inputPassword = @$('input[name=password]')
         @$visibilityButton = @$('[action=password-visibility]')
         @$strengthBar = @$('progress')
-        @$errorContainer=@$('.errors')
+
         if @error
-            @renderError(@error, false)
+            @showError(@error, false)
         else
-            @$errorContainer.hide()
+            @hideError()
 
 
     renderInput: =>
@@ -99,10 +102,6 @@ module.exports = class PasswordView extends StepView
             password: @$inputPassword.val()
         }
 
-    renderError: (error) ->
-        @$errorContainer.html(t(error))
-        @$errorContainer.show()
-
 
     onSubmit: (event)->
         event?.preventDefault()
@@ -112,9 +111,9 @@ module.exports = class PasswordView extends StepView
             errors = validation.errors
             if errors?.password
                 @$inputPassword.addClass('error')
-                @renderError(errors.password)
+                @showError(errors.password)
         else
             @model
                 .submit data
                 .then null, (error) =>
-                    @renderError error.message
+                    @showError error.message

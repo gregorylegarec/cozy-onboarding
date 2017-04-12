@@ -7,6 +7,7 @@ module.exports = class InfosView extends StepView
 
     ui:
         next: '.controls .next'
+        errors: '.erros'
 
     events:
         'click @ui.next': 'onSubmit'
@@ -95,7 +96,7 @@ module.exports = class InfosView extends StepView
     #
     # @param field: field's name
     # @param message: error message
-    showError: (field, message) ->
+    showFieldError: (field, message) ->
         return unless field in @fields
 
         @$inputs[field]?.addClass('error')
@@ -134,7 +135,7 @@ module.exports = class InfosView extends StepView
         @$errorPlaceholders ?= []
         @fields.forEach (field) =>
             if errors and errors[field]
-                @showError field, errors[field]
+                @showFieldError field, errors[field]
             else
                 # We hide errors now to have a smoother rendering
                 @hideError field

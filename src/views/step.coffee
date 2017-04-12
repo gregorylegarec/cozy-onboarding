@@ -9,6 +9,9 @@ module.exports = class StepView extends LayoutView
     regions:
         progression: '.progression'
 
+    ui:
+        errors: '.errors'
+
 
     initialize: (options) ->
         super(options)
@@ -40,3 +43,12 @@ module.exports = class StepView extends LayoutView
         @$submit
             .removeAttr 'aria-disabled'
             .removeAttr 'disabled'
+
+
+    showError: (error) ->
+        @ui.errors.html t if error and error.message then error.message else error
+        @ui.errors.show()
+
+
+    hideError: () ->
+        @ui.errors.hide()

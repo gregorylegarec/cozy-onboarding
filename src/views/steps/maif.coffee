@@ -7,6 +7,7 @@ module.exports = class MaifView extends StepView
     ui:
         next: '.controls .next'
         pass: '.controls .pass'
+        errors: '.errors'
 
     events:
         'click @ui.next': 'onSubmit'
@@ -15,12 +16,11 @@ module.exports = class MaifView extends StepView
 
     onRender: (args...) ->
         super args...
-        @$errorContainer=@$('.errors')
 
         if @error
-            @renderError(@error)
+            @showError(@error)
         else
-            @$errorContainer.hide()
+            @hideError()
 
 
     onSubmit: (event) ->
@@ -28,7 +28,7 @@ module.exports = class MaifView extends StepView
         @model
             .submit()
             .then null, (error) =>
-                @renderError error.message
+                @showError error.message
 
 
     serializeData: ->
@@ -36,8 +36,3 @@ module.exports = class MaifView extends StepView
             id: "#{@model.get 'name'}-figure"
             service: "service-logo--#{@model.get 'name'}"
             figureid: require '../../assets/sprites/maif.svg'
-
-
-    renderError: (error) ->
-        @$errorContainer.html(t(error))
-        @$errorContainer.show()

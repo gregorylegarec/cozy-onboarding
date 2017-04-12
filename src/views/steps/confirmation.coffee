@@ -6,6 +6,7 @@ module.exports = class ConfirmationView extends StepView
 
     ui:
         next: '.controls .next'
+        errors: '.errors'
 
     events:
         'click @ui.next': 'onSubmit'
@@ -13,12 +14,11 @@ module.exports = class ConfirmationView extends StepView
 
     onRender: (args...) ->
         super args...
-        @$errorContainer=@$('.errors')
 
         if @error
-            @renderError(@error)
+            @show(@error)
         else
-            @$errorContainer.hide()
+            @hideError()
 
 
     onSubmit: (event) ->
@@ -26,15 +26,10 @@ module.exports = class ConfirmationView extends StepView
         @model
             .submit()
             .then null, (error) =>
-                @renderError error.message
+                @showError error.message
 
 
     serializeData: ->
         _.extend super,
             id: "#{@model.get 'name'}-figure"
             figureid: require '../../assets/sprites/icon-raised-hands.svg'
-
-
-    renderError: (error) ->
-        @$errorContainer.html(t(error))
-        @$errorContainer.show()

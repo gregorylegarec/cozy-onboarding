@@ -6,6 +6,7 @@ module.exports = class AccountsView extends StepView
 
     ui:
         next: '.controls .next'
+        errors: '.errors'
 
     events:
         'click @ui.next': 'onSubmit'
@@ -13,12 +14,11 @@ module.exports = class AccountsView extends StepView
 
     onRender: (args...) ->
         super args...
-        @$errorContainer=@$('.errors')
 
         if @error
-            @renderError(@error)
+            @showError(@error)
         else
-            @$errorContainer.hide()
+            @hideError()
 
 
     onSubmit: (event)->
@@ -30,8 +30,3 @@ module.exports = class AccountsView extends StepView
         _.extend super,
             id: "#{@model.get 'name'}-figure"
             figureid: require '../../assets/sprites/icon-thumbup.svg'
-
-
-    renderError: (error) ->
-        @$errorContainer.html(t(error))
-        @$errorContainer.show()
