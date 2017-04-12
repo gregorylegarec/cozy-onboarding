@@ -516,6 +516,17 @@ footer
       font-weight bold
       color $blue
 
+      &[aria-busy=true]
+          position relative
+
+          &::after
+              position static
+              width      (16/base-font-size)em
+              height     (16/base-font-size)em
+              margin-left (8/base-font-size)em
+              margin-right (-24/base-font-size)em
+              @extend    $icon-spinner-blue
+
 .service-logo--maif
     padding .5rem .5rem .75rem
     background-color $maif

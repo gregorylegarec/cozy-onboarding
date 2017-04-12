@@ -1,0 +1,6 @@
+if figureid
+  figure.service-logo(class=service)
+    svg: use(xlink:href=figureid)
+.service-name=t(name)
+.service-actions
+  button(role='connect')= t('intent service connect')
