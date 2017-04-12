@@ -7,13 +7,6 @@ block header
 block region
     p= t('step maif description line 1')
     div(class="services")
-      .service
-        if figureid
-          figure.service-logo(class=service)
-            svg: use(xlink:href=figureid)
-        .service-name= t('step maif service')
-        .service-actions
-          button= t('step maif connect')
 
 block controls
     button(class="next", aria-disabled="true", disabled="disabled")= t('step maif next')
