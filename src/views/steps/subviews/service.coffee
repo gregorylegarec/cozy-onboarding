@@ -9,10 +9,10 @@ module.exports = class ServiceView extends ItemView
     className: 'service'
 
     ui:
-        connect: '[role=connect]'
+        connect: '.connect'
 
     events:
-      'click [role=connect]': 'onConnect'
+      'click .connect': 'onConnect'
 
 
     initialize: (options) ->
