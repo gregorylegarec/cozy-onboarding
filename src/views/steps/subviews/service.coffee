@@ -20,7 +20,7 @@ module.exports = class ServiceView extends ItemView
         @intent = options.intent
 
         @onIntentStart = () =>
-            if typeof options.onIntentSuccess is 'function'
+            if typeof options.onIntentStart is 'function'
                 options.onIntentStart()
 
         @onIntentSuccess = (doc) =>
