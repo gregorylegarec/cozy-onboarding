@@ -234,7 +234,7 @@ module.exports = class Onboarding
         url = new URL "#{window.location.protocol}//#{@domain}/settings/instance"
 
         if not(@contextToken) and @registerToken
-          url.searchParams.append 'registerToken', @registerToken if @registerToken
+          url = "#{url}?registerToken=#{@registerToken}"
 
         headers = new Headers()
         headers.append 'Accept', 'application/vnd.api+json'
