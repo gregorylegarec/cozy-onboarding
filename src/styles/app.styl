@@ -272,6 +272,7 @@ select
 [role=button]
 button
     // mutualize behavior between button and a
+    position relative
     box-sizing        border-box
     border            0
     display           block
@@ -290,7 +291,6 @@ button
         cursor  default
 
     &[aria-busy=true]
-        position relative
 
         &::after
             position static
@@ -507,6 +507,7 @@ footer
     background-color $grey-11
 
     button
+      position relative
       width auto
       min-height auto
       padding 0
@@ -517,7 +518,6 @@ footer
       color $blue
 
       &[aria-busy=true]
-          position relative
 
           &::after
               position static
