@@ -35,7 +35,7 @@ module.exports = class ModalView extends ItemView
 
         contentWrapperElement = @ui.contentWrapper.get(0)
 
-        # Wait for content like iframe to be loaded
+        # Observe and wait content injection before showing the modal
         observer = new MutationObserver (event) =>
             $iframe = @$ 'iframe'
             if $iframe.length
