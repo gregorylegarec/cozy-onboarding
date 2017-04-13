@@ -4,7 +4,7 @@ application
 Main application that create a Mn.Application singleton and exposes it. Needs
 router and app_layout view.
 ###
-_        = require 'underscore'
+_ = require 'underscore'
 {Application} = require 'backbone.marionette'
 
 AppLayout = require './views/app_layout'

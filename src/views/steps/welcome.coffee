@@ -1,5 +1,4 @@
 _ = require 'underscore'
-
 StepView = require '../step'
 
 

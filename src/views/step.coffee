@@ -1,6 +1,5 @@
 {LayoutView} = require 'backbone.marionette'
 Backbone = require 'backbone'
-
 ProgressionView = require './steps/subviews/progression'
 
 

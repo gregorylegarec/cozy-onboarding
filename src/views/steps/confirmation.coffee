@@ -1,6 +1,7 @@
 StepView = require '../step'
 _ = require 'underscore'
 
+
 module.exports = class ConfirmationView extends StepView
     template: require '../templates/view_steps_confirmation'
 

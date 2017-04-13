@@ -2,6 +2,7 @@ StepView = require '../step'
 ServiceView = require './subviews/service'
 _ = require 'underscore'
 
+
 module.exports = class MaifView extends StepView
     template: require '../templates/view_steps_maif'
 
