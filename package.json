@@ -63,6 +63,7 @@
     "stylus": "^0.54.0",
     "stylus-loader": "^2.4.0",
     "svg-sprite-loader": "^0.0.31",
+    "webdriverio": "^4.6.2",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.0",
     "webpack-merge": "^1.0.2"
