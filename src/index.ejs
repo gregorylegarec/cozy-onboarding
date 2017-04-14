@@ -25,10 +25,10 @@
 <% _.forEach(htmlWebpackPlugin.files.css, function(file) { %>
   <link rel="stylesheet" href="<%- file %>">
 <% }); %>
-<% _.forEach(htmlWebpackPlugin.files.js, function(file) { %>
-  <script src="<%- file %>" defer></script>
-<% }); %>
 <% if (__STACK_ASSETS__) { %>
 {{.CozyClientJS}}
 <% } %>
+<% _.forEach(htmlWebpackPlugin.files.js, function(file) { %>
+  <script src="<%- file %>" defer></script>
+<% }); %>
 <div role="application" data-token="{{.Token}}" data-cozy-stack="{{.Domain}}">
