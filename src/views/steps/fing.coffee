@@ -36,6 +36,8 @@ module.exports = class FingView extends StepView
             id: "#{@model.get 'name'}-figure"
             service: "service-logo--#{@model.get 'name'}"
             figureid: require '../../assets/sprites/fing.svg'
+            edfLogo: require '../../assets/sprites/edf.svg'
+            orangeLogo: require '../../assets/sprites/orange.svg'
 
 
     renderError: (error) ->
