@@ -70,7 +70,7 @@
     "step edf service": "EDF",
     "step edf connect": "Sign in",
     "step fing service": "FING",
-    "step fing title": "First, sign in to your FING account",
+    "step fing title": "Sign in to MesInfos partners’ services",
     "step fing description line 1": "Lorem ipsum dolor sit amet, fluctuat nec mergitur",
     "step fing connect": "Sign in",
     "step fing next": "Go on",
