@@ -484,7 +484,10 @@ footer
     text-align center
 
 .service-logo
-    margin 1rem 1rem .75rem
+    box-sizing border-box
+    margin 1rem auto .75rem
+    max-width 4.25rem
+    height 4.25rem // I would love to set also a max-height, but some svg breaks loudly in that case (i.e. maif)
 
     svg
         max-width       100%
@@ -514,8 +517,5 @@ footer
       color $blue
 
 .service-logo--maif
-    box-sizing border-box
-    width 4.25rem
-    height 4.25rem
     padding .5rem .5rem .75rem
     background-color $maif
