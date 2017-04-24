@@ -11,16 +11,16 @@ block region
 
     div(class="services")
       .service
-        if figureid
+        if edfLogo
           figure.service-logo(class=service)
-            svg: use(xlink:href=figureid)
+            svg: use(xlink:href=edfLogo)
         .service-name= t('step edf service')
         .service-actions
           button= t('step edf connect')
       .service
-        if figureid
+        if orangeLogo
           figure.service-logo(class=service)
-            svg: use(xlink:href=figureid)
+            svg: use(xlink:href=orangeLogo)
         .service-name= t('step orange service')
         .service-actions
           button= t('step orange connect')

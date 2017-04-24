@@ -468,6 +468,7 @@ footer
     display flex
     justify-content center
     align-items stretch
+    margin-top 1.6875em
     margin-left -7.5em
     margin-right -7.5em
 
@@ -481,14 +482,22 @@ footer
     text-align center
 
 .service-logo
+    box-sizing border-box
     margin 1rem auto .75rem
+    max-width 7rem
+    height 4.25rem // I would love to set also a max-height, but some svg breaks loudly in that case (i.e. maif)
 
     svg
         max-width       100%
         height          100%
 
+.service-logo--maif
+    padding .5rem .5rem .75rem
+    background-color $maif
+    max-width 4.25rem
+
 .service-name
-    margin-bottom .5rem
+    margin-bottom 1rem
     padding 0 1rem
     font-weight bold
     line-height 1.5
@@ -512,13 +521,6 @@ footer
 
       &[aria-busy=true]::after
         @extend $icon-spinner-blue
-
-.service-logo--maif
-    box-sizing border-box
-    width 4.25rem
-    height 4.25rem
-    padding .5rem .5rem .75rem
-    background-color $maif
 
 
 // Modal
