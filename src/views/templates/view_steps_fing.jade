@@ -5,8 +5,6 @@ block header
     h1=t('step fing title')
 
 block region
-    p= t('step fing description line 1')
-
     p(class="errors")
 
     div(class="services")
@@ -16,14 +14,14 @@ block region
             svg: use(xlink:href=edfLogo)
         .service-name= t('step edf service')
         .service-actions
-          button= t('step edf connect')
+          button= t('sign in')
       .service
         if orangeLogo
           figure.service-logo(class=service)
             svg: use(xlink:href=orangeLogo)
         .service-name= t('step orange service')
         .service-actions
-          button= t('step orange connect')
+          button= t('sign in')
 
 block controls
     button(class="next", aria-disabled="true")= t('step fing next')
