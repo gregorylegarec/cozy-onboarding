@@ -1,7 +1,8 @@
 // WebdriverIO configuration filen
 // See http://webdriver.io/guide/testrunner/configurationfile.html
 var path = require('path')
-// var VisualRegressionCompare = require('wdio-visual-regression-service/compare')
+
+var browserstack = require('browserstack-local');
 
 function getScreenshotName (basePath) {
   return function (context) {
@@ -15,8 +16,6 @@ function getScreenshotName (basePath) {
 }
 
 exports.config = {
-  host: 'localhost',
-  port: 4444,
   path: '/wd/hub',
   specs: [
     './**/*.js'
@@ -25,9 +24,19 @@ exports.config = {
     './wdio.conf.js'
   ],
   maxInstances: 10,
+  // See https://www.browserstack.com/automate/webdriverio
   capabilities: [{
-    maxInstances: 5,
-    browserName: 'chrome'
+    'os': 'Windows',
+    'os_version': '10',
+    'browser': 'Chrome',
+    'browser_version': '42.0',
+    'resolution': '1024x768'
+  }, {
+    'os': 'OS X',
+    'os_version': 'Sierra',
+    'browser': 'Safari',
+    'browser_version': '10.0',
+    'resolution': '1024x768'
   }],
   sync: true,
   logLevel: 'verbose',
@@ -39,19 +48,28 @@ exports.config = {
   connectionRetryTimeout: 90000,
   connectionRetryCount: 3,
   services: [
-    'visual-regression'
+    'browserstack'
   ],
-  // visualRegression: {
-  //   compare: new VisualRegressionCompare.LocalCompare({
-  //     referenceName: getScreenshotName(path.join(process.cwd(), './__screenshots__/reference')),
-  //     screenshotName: getScreenshotName(path.join(process.cwd(), './__screenshots__/screen')),
-  //     diffName: getScreenshotName(path.join(process.cwd(), './__screenshots__/diff')),
-  //     misMatchTolerance: 0.01
-  //   }),
-  //   viewportChangePause: 300,
-  //   widths: [320, 640, 1024],
-  //   orientations: ['landscape']
-  // },
+
+  // Code to start browserstack local before start of test
+  onPrepare: function (config, capabilities) {
+    console.log('Connecting local')
+    return new Promise(function (resolve, reject) {
+      exports.bs_local = new browserstack.Local()
+      exports.bs_local.start({ 'key': exports.config.key }, function (error) {
+        if (error) return reject(error)
+        resolve()
+      })
+    })
+  },
+
+  // Code to stop browserstack local after end of test
+  onComplete: function (capabilties, specs) {
+    exports.bs_local.stop(function () {})
+  },
+  user: 'browserstack_login',
+  key: 'browserstack_password',
+  browserstackLocal: true,
   framework: 'mocha',
   mochaOpts: {
     ui: 'bdd',
