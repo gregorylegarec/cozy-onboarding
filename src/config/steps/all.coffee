@@ -11,12 +11,8 @@ accounts = require './accounts'
 confirmation = require './confirmation'
 
 module.exports = [
-    welcome,
-    agreement,
     password,
     infos,
-    accounts,
     maif,
-    fing,
-    confirmation
-]
+    fing
+  ]
