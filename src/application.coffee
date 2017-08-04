@@ -83,7 +83,7 @@ class App extends Application
     # Redirect to given app
     handleTriggerDone: () =>
         # default app redirection is handled by the stack
-        window.location.replace "#{@domain}/settings/onboarded"
+        window.location.replace "//#{@domain}/settings/onboarded"
 
 
     # Update view with error message
