@@ -8,6 +8,7 @@ the application.
 require('babel-polyfill')
 
 Polyglot = require 'node-polyglot'
+Reporter = require './lib/reporter'
 
 
 ###
@@ -30,6 +31,9 @@ initLocale = ->
     window.t = polyglot.t.bind polyglot
 
 
+initReporter = ->
+    Reporter.configure(true)
+
 ###
 Retrieve the given query string parameter from url
 ###
@@ -49,6 +53,7 @@ Trigger locale initilization and starts application singleton.
 ###
 document.addEventListener 'DOMContentLoaded', ->
     initLocale()
+    initReporter()
     registerToken = getQueryStringParam('registerToken')
     window.history.pushState({}, '', new URL(window.location.href).origin)
     app = require './application'
