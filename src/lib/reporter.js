@@ -1,14 +1,28 @@
-/* global __SENTRY_DSN__, __SENTRY_ENV__ */
+/* global __SENTRY_DSN__, __SENTRY_SECRET__ */
 import Raven from 'raven-js'
 
 let isEnable = false
-export const getConfig = () => ({
-  shouldSendCallback: () => isEnable
-})
-console.debug('__SENTRY_DSN__', __SENTRY_DSN__)
-export const configure = (enable) => {
+export const getConfig = (cozyClient, useCozyProxy) => {
+  const config = {
+    shouldSendCallback: () => isEnable
+  }
+
+  if (useCozyProxy && cozyClient) {
+    config.transport = (options) => {
+      const { auth, data } = options
+      const parameters = {...auth, ...{project: data.project}, ...{data: JSON.stringify(data)}, ...{sentry_secret: __SENTRY_SECRET__}}
+      cozyClient.fetchJSON('POST', '/remote/cc.cozycloud.sentry', parameters)
+        .catch(options.onError)
+        .then(options.onSuccess)
+    }
+  }
+
+  return config
+}
+
+export const configure = (enable, cozyClient, useCozyProxy) => {
   isEnable = enable
-  Raven.config(`${__SENTRY_DSN__}`, getConfig()).install()
+  Raven.config(`${__SENTRY_DSN__}`, getConfig(cozyClient, useCozyProxy)).install()
 }
 
 export const logException = (err) => {
