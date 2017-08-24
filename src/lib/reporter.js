@@ -4,7 +4,18 @@ import Raven from 'raven-js'
 let isEnable = false
 export const getConfig = (cozyClient, useCozyProxy) => {
   const config = {
-    shouldSendCallback: () => isEnable
+    shouldSendCallback: () => isEnable,
+    // Sentry may store a breadcrumb with an empty data.url property.
+    // It causes the RavenJS `truncate` method to throw an error and prevent
+    // Sentry to work properly. This workaround allows us to avoid this kind
+    // of error but it should be removed as soon than RavenJS will be fixed.
+    breadcrumbCallback: (crumb) => {
+      if (crumb.data && crumb.data.hasOwnProperty('url') && !crumb.data.url) {
+        delete crumb.data.url
+      }
+
+      return crumb
+    }
   }
 
   if (useCozyProxy && cozyClient) {
