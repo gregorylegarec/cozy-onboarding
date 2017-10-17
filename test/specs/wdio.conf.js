@@ -44,6 +44,9 @@ exports.config = {
   onPrepare: function (config, capabilities) {
     console.log('Connecting local')
     return new Promise(function (resolve, reject) {
+      if (!(process.env.BROWSERSTACK_USER && process.env.BROWSERSTACK_APP_KEY)) {
+        return reject(new Error('Environment variables BROWSERSTACK_USER and BROWSERSTACK_APP_KEY are not defined.'))
+      }
       exports.bs_local = new browserstack.Local()
       exports.bs_local.start({ 'key': exports.config.key }, function (error) {
         if (error) return reject(error)
@@ -56,8 +59,8 @@ exports.config = {
   onComplete: function (capabilties, specs) {
     exports.bs_local.stop(function () {})
   },
-  user: 'browserstack_login',
-  key: 'browserstack_password',
+  user: process.env.BROWSERSTACK_USER,
+  key: process.env.BROWSERSTACK_APP_KEY,
   framework: 'mocha',
   mochaOpts: {
     ui: 'bdd',
