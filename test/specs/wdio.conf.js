@@ -66,6 +66,6 @@ exports.config = {
     ui: 'bdd',
     compilers: ['js:babel-register'],
     require: ['babel-polyfill'],
-    timeout: 60000
+    timeout: 120000
   }
 }
