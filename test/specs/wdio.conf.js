@@ -1,19 +1,6 @@
 // WebdriverIO configuration filen
 // See http://webdriver.io/guide/testrunner/configurationfile.html
-var path = require('path')
-
-var browserstack = require('browserstack-local');
-
-function getScreenshotName (basePath) {
-  return function (context) {
-    var type = context.type
-    var testName = context.test.title
-    var width = context.meta.width
-    var browserVersion = parseInt(context.browser.version, 10)
-    var browserName = context.browser.name
-    return path.join(basePath, `${testName}_${type}_${browserName}_v${browserVersion}_w${width}.png`)
-  }
-}
+var browserstack = require('browserstack-local')
 
 exports.config = {
   path: '/wd/hub',

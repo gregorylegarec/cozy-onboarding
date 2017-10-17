@@ -27,27 +27,16 @@ const fetchRegisterToken = () => fetch(
     .then(registerTokenBase64 => Buffer.from(registerTokenBase64, 'base64').toString('hex'))
 
 describe('BrowserStack Local Testing', function () {
-  it('can check tunnel working', function (done) {
-    console.log('can check tunnel working')
-    browser
-      .url(`http://cozy.tools:8080/`)
-    assert.equal(browser.getText('h1'), 'Welcome cozy!')
-    // fetchRegisterToken()
-    //   .then(registerToken => {
-    //     console.log(`accessing http://onboarding.cozy.local:8080/?registerToken=${registerToken}`)
-    //     browser
-    //       .url(`http://onboarding.cozy.local:8080/?registerToken=${registerToken}`)
-    //
-    //     console.log('url.then')
-    //     browser.waitUntil(() => {
-    //       console.log('browser.waitUntil', browser.getUrl())
-    //       return browser.getUrl() !== `http://onboarding.cozy.local:8080/?registerToken=${registerToken}`
-    //     }, 30000)
-    //     .then(() => {
-    //       // assert(browser.getSource().match(/Up and running/i))
-    //       assert.equal(browser.getText('h1'), 'Plouf!')
-    //       done()
-    //     })
-    //   })
+  it('can check tunnel working', function () {
+    return fetchRegisterToken()
+      .then(registerToken => {
+        return browser
+          .url(`http://onboarding.cozy.local:8080/?registerToken=${registerToken}`)
+          .then(() => {
+            return browser.getText('h1').then(text => {
+              assert.equal(text, 'Choose your password')
+            })
+          })
+      })
   })
 })
