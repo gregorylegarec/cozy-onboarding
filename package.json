@@ -14,7 +14,9 @@
     "prewatch": "npm run clean",
     "lint": "standard 'src/**/*.js' 'src/**/*.jsx'",
     "test": "mocha test/**/* --bail --reporter spec --compilers coffee:coffee-script/register --colors",
+    "pretest:browserstack": "(cd test/specs/ && docker-compose rm --force && docker-compose pull && docker-compose up --build -d && sleep 5)",
     "test:browserstack": "(cd test/specs/ && ../../node_modules/.bin/wdio wdio.conf.js)",
+    "posttest:browserstack": "(cd test/specs/ && docker-compose down)",
     "watch": "NODE_ENV=development webpack --config webpack.config.js --watch --display-modules --display-chunks",
     "watch:server": "NODE_ENV=development webpack-dev-server --config webpack.config.js --port 8082 --display-modules --display-chunks --inline --hot"
   },
